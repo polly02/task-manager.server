@@ -29,7 +29,7 @@ async function updateUserDB(id, name, surname, pwd, email, status) {
     }
 }
 
-async function deleteUserDB(id){
+async function deleteUserDB(id) {
     const client = await pool.connect()
     try {
         client.query("BEGIN")
@@ -44,4 +44,30 @@ async function deleteUserDB(id){
     }
 }
 
-module.exports = { getUsersDB, getUserByIdDB, updateUserDB, deleteUserDB }
+async function patchUserDB(id, dataFromClient) {
+    const client = await pool.connect()
+    try {
+        await client.query('BEGIN')
+
+        const sql = "SELECT * FROM users  WHERE id = $1"
+        const data = (await client.query(sql, [id])).rows[0]
+
+        const mergeData = { ...data, ...dataFromClient }
+
+        const sql2 = "UPDATE users SET name=$1, surname=$2, pwd=$3, email=$4, status=$5 WHERE id=$6"
+        await client.query(sql2, [mergeData.name, mergeData.surname, mergeData.pwd, mergeData.email, mergeData.status, id])
+
+        const sql3 = "SELECT * FROM users WHERE id = $1"
+        const data3 = (await client.query(sql3, [id])).rows
+
+        await client.query('COMMIT')
+
+        return data3
+    } catch (error) {
+        await client.query('ROLLBACK')
+        console.log(`patchUser: ${error.message}`)
+        return []
+    }
+}
+
+module.exports = { getUsersDB, getUserByIdDB, updateUserDB, deleteUserDB, patchUserDB }

@@ -1,13 +1,15 @@
 const express = require("express")
-const { getUsers, getUserById, updateUser, deleteUser } = require("../services/user.service")
+const { getUsers, getUserById, updateUser, deleteUser, patchUser } = require("../services/user.service")
+const { buildResponse } = require("../helper/buildResponse")
+const { handleError } = require("../helper/handleError")
 const route = express.Router()
 
 route.get("/", async (req, res) => {
     try {
         const user = await getUsers()
-        res.status(200).send(user)
+        buildResponse(res, 200, user)
     } catch (error) {
-        res.status(404).send(error.message)
+        handleError(res, 404, error.message)
     }
 })
 
@@ -15,9 +17,9 @@ route.get("/:id", async (req, res) => {
     try {
         const { id } = req.params
         const user = await getUserById(id)
-        res.status(200).send(user)
+        buildResponse(res, 200, user)
     } catch (error) {
-        res.status(404).send(error.message)
+        handleError(res, 404, error.message)
     }
 })
 
@@ -26,9 +28,9 @@ route.put("/:id", async (req, res) => {
         const { id } = req.params
         const { name, surname, pwd, email, status } = req.body
         const user = await updateUser(id, name, surname, pwd, email, status)
-        res.status(200).send(user)
+        buildResponse(res, 200, user)
     } catch (error) {
-        res.status(404).send(error.message)
+        handleError(res, 404, error.message)
     }
 })
 
@@ -36,9 +38,19 @@ route.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params
         const user = await deleteUser(id)
-        res.status(200).send(user)
+        buildResponse(res, 200, user)
     } catch (error) {
-        res.status(404).send(error.message)
+        handleError(res, 404, error.message)
+    }
+})
+
+route.patch("/:id", async function (req, res) {
+    try {
+        const { id } = req.params
+        const user = await patchUser(id, req.body)
+        buildResponse(res, 200, user)
+    } catch (error) {
+        handleError(res, 404, error.message)
     }
 })
 
