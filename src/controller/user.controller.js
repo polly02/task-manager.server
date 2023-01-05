@@ -2,6 +2,7 @@ const express = require("express")
 const { getUsers, getUserById, updateUser, deleteUser, patchUser } = require("../services/user.service")
 const { buildResponse } = require("../helper/buildResponse")
 const { handleError } = require("../helper/handleError")
+const { isValidUserId, isValidUser } = require("../helper/validation")
 const route = express.Router()
 
 route.get("/", async (req, res) => {
@@ -13,7 +14,7 @@ route.get("/", async (req, res) => {
     }
 })
 
-route.get("/:id", async (req, res) => {
+route.get("/:id", isValidUserId, async (req, res) => {
     try {
         const { id } = req.params
         const user = await getUserById(id)
@@ -23,7 +24,7 @@ route.get("/:id", async (req, res) => {
     }
 })
 
-route.put("/:id", async (req, res) => {
+route.put("/:id", isValidUserId, isValidUser, async (req, res) => {
     try {
         const { id } = req.params
         const { name, surname, pwd, email, status } = req.body
@@ -34,7 +35,7 @@ route.put("/:id", async (req, res) => {
     }
 })
 
-route.delete("/:id", async (req, res) => {
+route.delete("/:id", isValidUserId, async (req, res) => {
     try {
         const { id } = req.params
         const user = await deleteUser(id)
@@ -44,7 +45,7 @@ route.delete("/:id", async (req, res) => {
     }
 })
 
-route.patch("/:id", async function (req, res) {
+route.patch("/:id", isValidUserId, async function (req, res) {
     try {
         const { id } = req.params
         const user = await patchUser(id, req.body)
