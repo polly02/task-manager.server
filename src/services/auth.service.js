@@ -12,7 +12,7 @@ async function doAuthorisation(pwd, email) {
     if (!foundUser.length) throw new Error("пользователя нет ")
 
     const user = await checkUserByPwdDB(pwd)
-    if(!user.length) throw new Error("пароль не совпадает")
+    if (!user.length) throw new Error("пароль не совпадает")
     return user
 }
 

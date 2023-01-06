@@ -25,7 +25,7 @@ async function createUserDB(name, surname, pwd, email) {
     }
 }
 
-async function checkUserByPwdDB(pwd){
+async function checkUserByPwdDB(pwd) {
     const client = await pool.connect()
     const sql = "SELECT * FROM users WHERE pwd=$1"
     const data = (await client.query(sql, [pwd])).rows

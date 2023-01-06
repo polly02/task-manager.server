@@ -9,7 +9,7 @@ const ExceptionType = {
     USER_NAME_NOT_VALID: "isValidUser:  name is not valid for this user.",
     USER_SURNAME_NOT_VALID: "isValidUser:  surname is not valid for this user.",
     USER_EMAIL_NOT_VALID: "isValidUser:  email is not valid for this user.",
-    
+
     TASK_NOT_FOUND_GET: "Task not found. getTask",
     TASK_NOT_FOUND_GET_BY_ID: "Task not found. getTaskById",
     TASK_NOT_FOUND_POST: "Task not found. getPost",
