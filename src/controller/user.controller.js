@@ -5,7 +5,7 @@ const { handleError } = require("../helper/handleError")
 const { isValidUserId, isValidUser } = require("../helper/validation")
 const route = express.Router()
 
-route.get("/", async (req, res) => {
+route.get("/", async function (req, res) {
     try {
         const user = await getUsers()
         buildResponse(res, 200, user)
@@ -14,7 +14,7 @@ route.get("/", async (req, res) => {
     }
 })
 
-route.get("/:id", isValidUserId, async (req, res) => {
+route.get("/:id", isValidUserId, async function (req, res) {
     try {
         const { id } = req.params
         const user = await getUserById(id)
@@ -24,7 +24,7 @@ route.get("/:id", isValidUserId, async (req, res) => {
     }
 })
 
-route.put("/:id", isValidUserId, isValidUser, async (req, res) => {
+route.put("/:id", isValidUserId, isValidUser, async function (req, res) {
     try {
         const { id } = req.params
         const { name, surname, pwd, email, status } = req.body
@@ -35,7 +35,7 @@ route.put("/:id", isValidUserId, isValidUser, async (req, res) => {
     }
 })
 
-route.delete("/:id", isValidUserId, async (req, res) => {
+route.delete("/:id", isValidUserId, async function (req, res) {
     try {
         const { id } = req.params
         const user = await deleteUser(id)
