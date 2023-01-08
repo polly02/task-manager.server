@@ -10,12 +10,12 @@ const ExceptionType = {
     USER_SURNAME_NOT_VALID: { id: 8, message: "isValidUser:  surname is not valid for this user." },
     USER_EMAIL_NOT_VALID: { id: 9, message: "isValidUser:  email is not valid for this user." },
 
-    TASK_NOT_FOUND_GET: "Task not found. getTask",
-    TASK_NOT_FOUND_GET_BY_ID: "Task not found. getTaskById",
-    TASK_NOT_FOUND_POST: "Task not found. getPost",
-    TASK_NOT_FOUND_PUT: "Task not found. updateTask",
-    TASK_NOT_FOUND_DELETE: "Task not found. deleteTask",
-    TASK_NOT_FOUND_PATCH: "Task not found. patchTask",
+    TASK_NOT_FOUND_GET: { id: 10, message: "Task not found. getTask"},
+    TASK_NOT_FOUND_GET_BY_ID: { id: 11, message:"Task not found. getTaskById"},
+    TASK_NOT_FOUND_POST: { id: 12, message:"Task not found. getPost"},
+    TASK_NOT_FOUND_PUT: { id: 13, message:"Task not found. updateTask"},
+    TASK_NOT_FOUND_DELETE: { id: 14, message:"Task not found. deleteTask"},
+    TASK_NOT_FOUND_PATCH: { id: 15, message:"Task not found. patchTask"},
 }
 
 module.exports = ExceptionType
