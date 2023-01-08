@@ -1,14 +1,14 @@
 const ExceptionType = {
-    USER_NOT_FOUND_GET: "User not found. getUser",
+    USER_NOT_FOUND_GET: { id: 1, message: "User not found. getUser" },
     // USER_NOT_FOUND_GET: { id: 1, message: "User not found. getUser" },    ИСПРАВИТЬ
-    USER_NOT_FOUND_GET_BY_ID: "User not found. getUserById",
-    USER_NOT_FOUND_PUT: "User not found. updateUser",
-    USER_NOT_FOUND_DELETE: "User not found. deleteUser",
-    USER_NOT_FOUND_PATCH: "User not found. patchUser",
-    USER_ID_NOT_VALID: "isValidUserId: id is not valid for this user.",
-    USER_NAME_NOT_VALID: "isValidUser:  name is not valid for this user.",
-    USER_SURNAME_NOT_VALID: "isValidUser:  surname is not valid for this user.",
-    USER_EMAIL_NOT_VALID: "isValidUser:  email is not valid for this user.",
+    USER_NOT_FOUND_GET_BY_ID: { id: 2, message: "User not found. getUserById" },
+    USER_NOT_FOUND_PUT: { id: 3, message: "User not found. updateUser" },
+    USER_NOT_FOUND_DELETE: { id: 4, message: "User not found. deleteUser" },
+    USER_NOT_FOUND_PATCH: { id: 5, message: "User not found. patchUser" },
+    USER_ID_NOT_VALID: { id: 6, message: "isValidUserId: id is not valid for this user." },
+    USER_NAME_NOT_VALID: { id: 7, message: "isValidUser:  name is not valid for this user." },
+    USER_SURNAME_NOT_VALID: { id: 8, message: "isValidUser:  surname is not valid for this user." },
+    USER_EMAIL_NOT_VALID: { id: 9, message: "isValidUser:  email is not valid for this user." },
 
     TASK_NOT_FOUND_GET: "Task not found. getTask",
     TASK_NOT_FOUND_GET_BY_ID: "Task not found. getTaskById",
