@@ -3,3 +3,8 @@ function buildResponse(res, status, message) {
 }
 
 module.exports = { buildResponse };
+
+// function sum(a, b) {
+//   return a + b;
+// }
+// module.exports = sum;
