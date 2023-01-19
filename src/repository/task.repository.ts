@@ -1,22 +1,21 @@
-const { pool } = require('../db');
+import { pool } from '../db';
+import { iTask } from '../interfaces/interfaces';
 
-async function getTasksDB() {
+async function getTasksDB(): Promise<iTask[]> {
   const client = await pool.connect();
   const sql = 'SELECT * FROM tasks';
   const data = (await client.query(sql)).rows;
   return data;
 }
 
-async function getTaskByIdDB(id) {
+async function getTaskByIdDB(id: number): Promise<iTask[]> {
   const client = await pool.connect();
   const sql = 'SELECT * FROM tasks WHERE id=$1';
   const data = (await client.query(sql, [id])).rows;
-  console.log(data);
-  console.log(id);
   return data;
 }
 
-async function createTaskDB(task, user_id) {
+async function createTaskDB(task: string, user_id: number): Promise<iTask[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -29,12 +28,12 @@ async function createTaskDB(task, user_id) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function updateTaskDB(id, task, user_id) {
+async function updateTaskDB(id: number, task: string, user_id: number): Promise<iTask[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -47,12 +46,12 @@ async function updateTaskDB(id, task, user_id) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function deleteTaskDB(id) {
+async function deleteTaskDB(id: number): Promise<iTask[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -65,12 +64,12 @@ async function deleteTaskDB(id) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function patchTaskDB(id, dataClient) {
+async function patchTaskDB(id: number, dataClient: iTask): Promise<iTask[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -88,16 +87,9 @@ async function patchTaskDB(id, dataClient) {
     return data2;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-module.exports = {
-  createTaskDB,
-  getTasksDB,
-  getTaskByIdDB,
-  updateTaskDB,
-  deleteTaskDB,
-  patchTaskDB,
-};
+export { createTaskDB, getTasksDB, getTaskByIdDB, updateTaskDB, deleteTaskDB, patchTaskDB };

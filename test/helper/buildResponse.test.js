@@ -1,8 +1,8 @@
-const { buildResponse } = require("../../src/helper/buildResponse")
+const { buildResponse } = require('../../src/helper/buildResponse');
 
 test(' ', () => {
-    expect(buildResponse (res, status, message)).toBe(res, 200, message);
-  })
+  expect(buildResponse(res, status, message)).toBe(res, 200, message);
+});
 
 // const sum = require("../../src/helper/buildResponse");
 

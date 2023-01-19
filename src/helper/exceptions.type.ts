@@ -75,4 +75,4 @@ const ExceptionType = {
   },
 };
 
-module.exports = ExceptionType;
+export default ExceptionType;

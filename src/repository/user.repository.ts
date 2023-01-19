@@ -1,20 +1,21 @@
-const { pool } = require('../db');
+import { pool } from '../db';
+import { iUser } from '../interfaces/interfaces';
 
-async function getUsersDB() {
+async function getUsersDB(): Promise<iUser[]> {
   const client = await pool.connect();
   const sql = 'SELECT * FROM users';
   const data = (await client.query(sql)).rows;
   return data;
 }
 
-async function getUserByIdDB(id) {
+async function getUserByIdDB(id: number): Promise<iUser[]> {
   const client = await pool.connect();
   const sql = 'SELECT * FROM users WHERE id=$1';
   const data = (await client.query(sql, [id])).rows;
   return data;
 }
 
-async function updateUserDB(id, name, surname, pwd, email, status) {
+async function updateUserDB(id: number, name: string, surname: string, pwd: string, email: string, status: number): Promise<iUser[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -24,12 +25,12 @@ async function updateUserDB(id, name, surname, pwd, email, status) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function deleteUserDB(id) {
+async function deleteUserDB(id: number): Promise<iUser[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -39,12 +40,12 @@ async function deleteUserDB(id) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function patchUserDB(id, dataFromClient) {
+async function patchUserDB(id: number, dataFromClient: iUser): Promise<iUser[]> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -65,15 +66,9 @@ async function patchUserDB(id, dataFromClient) {
     return data3;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(`patchUser: ${error.message}`);
+    console.log(`patchUser: ${error}`);
     return [];
   }
 }
 
-module.exports = {
-  getUsersDB,
-  getUserByIdDB,
-  updateUserDB,
-  deleteUserDB,
-  patchUserDB,
-};
+export { getUsersDB, getUserByIdDB, updateUserDB, deleteUserDB, patchUserDB };

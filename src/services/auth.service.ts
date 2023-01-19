@@ -1,19 +1,18 @@
-const bcrypt = require('bcrypt');
-const ExceptionType = require('../helper/exceptions.type');
-const { createUserDB, getUserByEmailDB } = require('../repository/auth.repository');
+import bcrypt from 'bcrypt';
+import ExceptionType from '../helper/exceptions.type';
+import { createUserDB, getUserByEmailDB } from '../repository/auth.repository';
 
 const saltround = 10;
 
-async function createUser(name, surname, pwd, email) {
+async function createUser(name: string, surname: string, pwd: string, email: string): Promise<void> {
   const foundUser = await getUserByEmailDB(email);
   if (foundUser.length) throw new Error(ExceptionType.REG_USER_SAME_LOGIN.message);
 
   const hashedPwd = await bcrypt.hash(pwd, saltround);
-
   await createUserDB(name, surname, hashedPwd, email);
 }
 
-async function doAuthorisation(pwd, email) {
+async function doAuthorisation(pwd: string, email: string): Promise<void> {
   const foundUser = await getUserByEmailDB(email);
   if (!foundUser.length) throw new Error(ExceptionType.AUTH_USER_WITH_EMAIL.message);
 
@@ -22,4 +21,4 @@ async function doAuthorisation(pwd, email) {
   if (!(await bcrypt.compare(pwd, hashedPwd))) throw new Error(ExceptionType.AUTH_USER_WITH_PWD.message);
 }
 
-module.exports = { createUser, doAuthorisation };
+export { createUser, doAuthorisation };
