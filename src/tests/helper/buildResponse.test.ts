@@ -7,6 +7,7 @@ describe("buildResponse function", () => {
             status: jest.fn(),
             send: jest.fn()
         }
+        
         buildResponse(mResponse, 200, "success")
 
         expect(mResponse.status).toHaveBeenCalled()

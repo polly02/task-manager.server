@@ -8,6 +8,7 @@ describe("handelError function", ()=>{
             status: jest.fn(),
             send: jest.fn()
         }
+        
         handleError(mResponse, 404, ExceptionType.TASK_NOT_FOUND_GET.message)
 
         expect(mResponse.status).toHaveBeenCalled()
