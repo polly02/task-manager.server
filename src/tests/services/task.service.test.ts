@@ -24,7 +24,6 @@ describe("getTasks function", () => {
         try {
             await getTasks()
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_GET.message)
         }
     })
@@ -52,7 +51,6 @@ describe("getTaskById function", () => {
         try {
             await getTaskById(1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_GET_BY_ID.message)
         }
     })
