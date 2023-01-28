@@ -9,7 +9,6 @@ async function createUser(name: string, surname: string, pwd: string, email: str
   if (foundUser.length) throw new Error(ExceptionType.REG_USER_SAME_LOGIN.message);
 
   const hashedPwd = await bcrypt.hash(pwd, saltround);
-  console.log(hashedPwd);
   await createUserDB(name, surname, hashedPwd, email);
 }
 
