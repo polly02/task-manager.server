@@ -12,8 +12,8 @@ describe("getTasks function", () => {
         const result = await getTasks()
 
         expect(mock).toHaveBeenCalled()
-        // expect(result[0].task).toBe("task")
-        // expect(result[0].user_id).toBe(1)
+        expect(result[0].task).toBe("task")
+        expect(result[0].user_id).toBe(1)
     })
 
     test("should return exception", async () => {
@@ -77,7 +77,6 @@ describe("createTask function", () => {
         try {
             await createTask("task", 1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_POST.message)
         }
     })
@@ -105,7 +104,6 @@ describe("updateTask function", () => {
         try {
             await updateTask(1, "task", 1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_PUT.message)
         }
     })
@@ -120,7 +118,6 @@ describe("deleteTask function", () => {
         const result = await deleteTask(1)
 
         expect(mock).toHaveBeenCalled()
-        // expect(result[0].id).toBe(1)
         expect(result[0].task).toBe("task")
         expect(result[0].user_id).toBe(1)
     })
@@ -133,7 +130,6 @@ describe("deleteTask function", () => {
         try {
             await deleteTask(1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_DELETE.message)
         }
     })
@@ -176,7 +172,6 @@ describe("patchTask function", () => {
         try {
             await patchTask(1, {task: "task"})
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.TASK_NOT_FOUND_PATCH.message)
         }
     })

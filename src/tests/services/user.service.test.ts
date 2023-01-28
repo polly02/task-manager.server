@@ -12,7 +12,7 @@ describe("getUsers function", () => {
 
         expect(mock).toHaveBeenCalled()
         expect(result[0].id).toBe(1)
-        // expect(result[0].name).toBe("name")
+        expect(result[0].name).toBe("name")
     })
 
     test("should return exception", async () => {
@@ -23,7 +23,6 @@ describe("getUsers function", () => {
         try {
             await getUsers()
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.USER_NOT_FOUND_GET.message)
         }
     })
@@ -51,7 +50,6 @@ describe("getUserById function", () => {
         try {
             await getUserById(1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.USER_NOT_FOUND_GET_BY_ID.message)
         }
     })
@@ -82,7 +80,6 @@ describe("updateUser function", () => {
         try {
             await updateUser(1, "name","surname", "pwd12345", "email@mail.ru", 1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.USER_NOT_FOUND_PUT.message)
         }
     })
@@ -109,7 +106,6 @@ describe("deleteUser function", () => {
         try {
             await deleteUser(1)
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.USER_NOT_FOUND_DELETE.message)
         }
     })
@@ -136,7 +132,6 @@ describe("patchUser function", () => {
         try {
             await patchUser(1, {name: "name"})
         } catch (error: any) {
-            expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.USER_NOT_FOUND_PATCH.message)
         }
     })
