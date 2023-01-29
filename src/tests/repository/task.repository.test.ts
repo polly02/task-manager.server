@@ -1,86 +1,86 @@
-import {  getTasksDB, getTaskByIdDB, createTaskDB, updateTaskDB, deleteTaskDB, patchTaskDB } from "../../repository/task.repository";
+import { getTasksDB, getTaskByIdDB, createTaskDB, updateTaskDB, deleteTaskDB, patchTaskDB } from '../../repository/task.repository';
 
 const mClient = {
-    query: jest.fn()
-}
+  query: jest.fn(),
+};
 
-jest.mock("pg", () => {
-    const mPool = {
-        connect: jest.fn(() => mClient)
-    }
-    return { Pool: jest.fn(() => mPool) }
-})
+jest.mock('pg', () => {
+  const mPool = {
+    connect: jest.fn(() => mClient),
+  };
+  return { Pool: jest.fn(() => mPool) };
+});
 
 afterEach(() => {
-    jest.clearAllMocks()
-})
+  jest.clearAllMocks();
+});
 
-describe("getTasksDB function", () => {
-    test("should return succes", async () => {
-        const mockTasks = [{ id: 1, task: "task", user_id: 1 }]
+describe('getTasksDB function', () => {
+  test('should return succes', async () => {
+    const mockTasks = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTasks })
-        const expected = await getTasksDB()
+    mClient.query.mockResolvedValue({ rows: mockTasks });
+    const expected = await getTasksDB();
 
-        expect(expected).toEqual(mockTasks)
-    })
-})
+    expect(expected).toEqual(mockTasks);
+  });
+});
 
-describe("getTaskByIdDB function", () => {
-    test("should return succes", async () => {
-        const mockTask = [{ id: 1, task: "task", user_id: 1 }]
+describe('getTaskByIdDB function', () => {
+  test('should return succes', async () => {
+    const mockTask = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTask })
-        const expected = await getTaskByIdDB(1)
+    mClient.query.mockResolvedValue({ rows: mockTask });
+    const expected = await getTaskByIdDB(1);
 
-        expect(expected).toEqual(mockTask)
-    })
-})
+    expect(expected).toEqual(mockTask);
+  });
+});
 
-describe("createTaskDB function", () => {
-    test("should return succes", async () => {
-        const mockTask = [{ id: 1, task: "task", user_id: 1 }]
+describe('createTaskDB function', () => {
+  test('should return succes', async () => {
+    const mockTask = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTask })
-        const expected = await createTaskDB("task", 1)
+    mClient.query.mockResolvedValue({ rows: mockTask });
+    const expected = await createTaskDB('task', 1);
 
-        expect(mClient.query).toBeCalledWith('COMMIT')
-        expect(expected).toEqual(mockTask)
-    })
-})
+    expect(mClient.query).toBeCalledWith('COMMIT');
+    expect(expected).toEqual(mockTask);
+  });
+});
 
-describe("updateTaskDB function", () => {
-    test("should return succes", async () => {
-        const mockTask = [{ id: 1, task: "task", user_id: 1 }]
+describe('updateTaskDB function', () => {
+  test('should return succes', async () => {
+    const mockTask = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTask })
-        const expected = await updateTaskDB(1, "task", 1)
+    mClient.query.mockResolvedValue({ rows: mockTask });
+    const expected = await updateTaskDB(1, 'task', 1);
 
-        expect(mClient.query).toBeCalledWith('COMMIT')
-        expect(expected).toEqual(mockTask)
-    })
-})
+    expect(mClient.query).toBeCalledWith('COMMIT');
+    expect(expected).toEqual(mockTask);
+  });
+});
 
-describe("deleteTaskDB function", () => {
-    test("should return succes", async () => {
-        const mockTask = [{ id: 1, task: "task", user_id: 1 }]
+describe('deleteTaskDB function', () => {
+  test('should return succes', async () => {
+    const mockTask = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTask })
-        const expected = await deleteTaskDB(1)
+    mClient.query.mockResolvedValue({ rows: mockTask });
+    const expected = await deleteTaskDB(1);
 
-        expect(mClient.query).toBeCalledWith('COMMIT')
-        expect(expected).toEqual(mockTask)
-    })
-})
+    expect(mClient.query).toBeCalledWith('COMMIT');
+    expect(expected).toEqual(mockTask);
+  });
+});
 
-describe("patchTaskDB function", () => {
-    test("should return succes", async () => {
-        const mockTask = [{ id: 1, task: "task", user_id: 1 }]
+describe('patchTaskDB function', () => {
+  test('should return succes', async () => {
+    const mockTask = [{ id: 1, task: 'task', user_id: 1 }];
 
-        mClient.query.mockResolvedValue({ rows: mockTask })
-        const expected = await patchTaskDB(1, {task: "task"})
+    mClient.query.mockResolvedValue({ rows: mockTask });
+    const expected = await patchTaskDB(1, { task: 'task' });
 
-        expect(mClient.query).toBeCalledWith('COMMIT')
-        expect(expected).toEqual(mockTask)
-    })
-})
+    expect(mClient.query).toBeCalledWith('COMMIT');
+    expect(expected).toEqual(mockTask);
+  });
+});
